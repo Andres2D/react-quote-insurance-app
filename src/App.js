@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Form from './components/Form';
 import Summary from './components/Summary';
 import Result from './components/Result';
+import Spinner from './components/Spinner';
 
 const Container = styled.div`
   max-width: 600px;
@@ -26,6 +27,8 @@ function App() {
     }
   });
 
+  const [loading, saveLoading] = useState(false);
+
   const {quote, data} = summary;
 
   return (
@@ -37,13 +40,20 @@ function App() {
       <FormContainer>
         <Form
           saveSummary={saveSummary}
+          saveLoading={saveLoading}
         />
+
+        {loading ? <Spinner /> : null}
+
         <Summary 
           data={data}
         />
-        <Result 
-          quote={quote}
-        />
+
+      { !loading 
+        ? <Result 
+            quote={quote}
+          />
+      : null}
       </FormContainer>
     </Container>
   );

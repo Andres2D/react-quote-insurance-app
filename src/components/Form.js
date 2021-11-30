@@ -49,7 +49,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-const Form = ({saveSummary}) => {
+const Form = ({saveSummary, saveLoading}) => {
 
     const [data, saveData] = useState({
         trademark: '',
@@ -101,10 +101,16 @@ const Form = ({saveSummary}) => {
         result = parseFloat(increasePlan * result).toFixed(2);
     
         // total
-        saveSummary({
-            quote: result,
-            data
-        })
+
+        saveLoading(true);
+
+        setTimeout(() => {
+            saveLoading(false);
+            saveSummary({
+                quote: result,
+                data
+            });
+        }, 3000);
     }
 
     return ( 
