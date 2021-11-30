@@ -23,3 +23,7 @@ export const calculateByTrademark = (trademark) => {
 export const calculateByPlan = (plan) => {
     return plan === 'basic' ? 1.20 : 1.50;
 }
+
+export const capitalize = (text) => {
+    return `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
+}
