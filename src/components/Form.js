@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
+import { getDifferenceYear } from '../helpers/calculator';
 
 const Field = styled.div`
     display: flex;
@@ -79,6 +80,25 @@ const Form = () => {
         }
 
         saveError(false);
+
+        // get the diference of years
+        const difference = getDifferenceYear(year);
+        
+        // a base of 2000
+        let result = 2000;
+
+        // for each year need to substract the 3%
+        result -= ((difference * 3) * result) / 100;
+        console.log(result);
+
+        // American 15%
+        // Assian 5%
+        // European 30%
+
+        // Basic 20%
+        // Complete 50%
+
+        // total
     }
 
     return ( 
@@ -112,6 +132,7 @@ const Form = () => {
                     onChange={getFormData}
                 >
                     <option value="">-- Select --</option>
+                    <option value="2022">2022</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
                     <option value="2019">2019</option>
