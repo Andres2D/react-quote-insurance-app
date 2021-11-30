@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import {capitalize} from '../helpers/calculator';
 
 const ContainerSummary = styled.div`
@@ -25,6 +26,10 @@ const Summary = ({data}) => {
             </ul>
         </ContainerSummary>
      );
+}
+
+Summary.propTypes = {
+    data: PropTypes.object.isRequired
 }
  
 export default Summary;

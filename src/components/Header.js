@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
+import Form from './Form';
 
 const ContentHeader = styled.header`
     background-color: #26C6DA;
@@ -21,6 +23,10 @@ const Header = ({title}) => {
             <TextHeader>{title}</TextHeader>
         </ContentHeader>
      );
+}
+
+Form.propTypes = {
+    title: PropTypes.string.isRequired
 }
 
 export default Header;
