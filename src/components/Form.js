@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
-import { getDifferenceYear } from '../helpers/calculator';
+import { getDifferenceYear, calculateByTrademark, calculateByPlan } from '../helpers/calculator';
 
 const Field = styled.div`
     display: flex;
@@ -54,7 +54,7 @@ const Form = () => {
     const [data, saveData] = useState({
         trademark: '',
         year: '',
-        plan: ''
+        plan: 'basic'
     });
 
     const [error, saveError] = useState(false);
@@ -89,15 +89,18 @@ const Form = () => {
 
         // for each year need to substract the 3%
         result -= ((difference * 3) * result) / 100;
-        console.log(result);
 
         // American 15%
         // Assian 5%
         // European 30%
+        result = calculateByTrademark(trademark) * result;
 
         // Basic 20%
         // Complete 50%
-
+        const increasePlan = calculateByPlan(plan); 
+        result = parseFloat(increasePlan * result).toFixed(2);
+        console.log(result);
+    
         // total
     }
 
@@ -120,7 +123,7 @@ const Form = () => {
                     <option value="">-- Select --</option>
                     <option value="american">American</option>
                     <option value="european">European</option>
-                    <option value="asian">Asian</option>
+                    <option value="assian">Assian</option>
                 </Select>
             </Field>
 
