@@ -40,6 +40,14 @@ const Button = styled.button`
     }
 `;
 
+const Error = styled.div`
+    background-color: red;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+`;
+
 const Form = () => {
 
     const [data, saveData] = useState({
@@ -47,6 +55,8 @@ const Form = () => {
         year: '',
         plan: ''
     });
+
+    const [error, saveError] = useState(false);
 
     // Extract the value of the state
     const {trademark, year, plan} = data;
@@ -59,8 +69,27 @@ const Form = () => {
         })
     }
 
+    // When user press submit
+    const quoteInsurance = e => {
+        e.preventDefault();
+
+        if(trademark.trim() === '' || year.trim() === '' || plan.trim() === '') {
+            saveError(true);
+            return;
+        }
+
+        saveError(false);
+    }
+
     return ( 
-        <form>
+        <form
+            onSubmit={quoteInsurance}
+        >
+
+            {error ? 
+                <Error>All fields are required</Error>
+            : null}
+
             <Field>
                 <Label>Trademark</Label>
                 <Select
@@ -115,7 +144,7 @@ const Form = () => {
                 /> Complete
             </Field>
 
-            <Button type="button">Quote</Button>
+            <Button type="submit">Quote</Button>
         </form>
      );
 }
