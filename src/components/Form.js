@@ -49,7 +49,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-const Form = () => {
+const Form = ({saveSummary}) => {
 
     const [data, saveData] = useState({
         trademark: '',
@@ -99,9 +99,12 @@ const Form = () => {
         // Complete 50%
         const increasePlan = calculateByPlan(plan); 
         result = parseFloat(increasePlan * result).toFixed(2);
-        console.log(result);
     
         // total
+        saveSummary({
+            quote: result,
+            data
+        })
     }
 
     return ( 

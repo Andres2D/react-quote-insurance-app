@@ -1,6 +1,8 @@
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import Header from './components/Header';
 import Form from './components/Form';
+import Summary from './components/Summary';
 
 const Container = styled.div`
   max-width: 600px;
@@ -13,6 +15,18 @@ const FormContainer = styled.div`
 `;
 
 function App() {
+
+  const [summary, saveSummary] = useState({
+    quote: 0,
+    data: {
+      trademark: '',
+      year: '',
+      plan: ''
+    }
+  });
+
+  const {data} = summary;
+
   return (
     <Container>
       <Header
@@ -20,7 +34,12 @@ function App() {
       />
       
       <FormContainer>
-        <Form />
+        <Form
+          saveSummary={saveSummary}
+        />
+        <Summary 
+          data={data}
+        />
       </FormContainer>
     </Container>
   );
